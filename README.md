@@ -9,19 +9,19 @@ Node3. ip 192.168.201.80
 
 
 ```
-# sudo apt update  
-# sudo apt install default-jdk 
-# java --version 
-# wget https://archive.apache.org/dist/kafka/3.2.0/kafka_2.13-3.2.0.tgz
-# tar xzf kafka_2.13-3.2.0.tgz 
-# sudo mv kafka_2.13-3.2.0 /usr/local/kafka
+ sudo apt update  
+ sudo apt install default-jdk 
+java --version 
+ wget https://archive.apache.org/dist/kafka/3.2.0/kafka_2.13-3.2.0.tgz
+tar xzf kafka_2.13-3.2.0.tgz 
+sudo mv kafka_2.13-3.2.0 /usr/local/kafka
 
 ```
 
 
 =====================================
  ```
-# sudo nano /etc/systemd/system/zookeeper.service 
+ sudo nano /etc/systemd/system/zookeeper.service 
 
 [Unit]
 Description=Apache Zookeeper server
@@ -38,7 +38,7 @@ Restart=on-abnormal
 [Install]
 WantedBy=multi-user.target
 ==============================
-# sudo nano /etc/systemd/system/kafka.service 
+ sudo nano /etc/systemd/system/kafka.service 
 
 [Unit]
 Description=Apache Kafka Server
@@ -55,17 +55,17 @@ ExecStop=/usr/local/kafka/bin/kafka-server-stop.sh
 WantedBy=multi-user.target
 ======================================================
 Service  Checking Command
-# sudo systemctl daemon-reload 
-# sudo systemctl start zookeeper 
-# sudo systemctl start kafka 
-# sudo systemctl status zookeeper 
-# sudo systemctl status kafka
+ sudo systemctl daemon-reload 
+ sudo systemctl start zookeeper 
+ sudo systemctl start kafka 
+ sudo systemctl status zookeeper 
+ sudo systemctl status kafka
 ============================================================
 Node_2 ip 192.168.201.79
 broder-2***Producer
 
-# /usr/local/kafka/config
-# cat server.properties
+ /usr/local/kafka/config
+ cat server.properties
 
 broker.id=2
 listeners=PLAINTEXT://192.168.201.79:9093
@@ -73,10 +73,10 @@ log.dirs=/tmp/kafka-logs-2
 zookeeper.connect=192.168.201.62:2181,192.168.201.79:2181,192.168.201.80:2181
 
 ********
-# cat producer.properties
+ cat producer.properties
 bootstrap.servers=192.168.201.62:9092
 ******************
-# cat consumer.properties
+ cat consumer.properties
 bootstrap.servers=192.168.201.62:9092
 ```
 
@@ -85,8 +85,8 @@ bootstrap.servers=192.168.201.62:9092
 ```
 Node_3 ip 192.168.201.80
 
-# /usr/local/kafka/config
-# cat server.properties
+ /usr/local/kafka/config
+ cat server.properties
 broker.id=3
 listeners=PLAINTEXT://192.168.201.80:9092
 log.dirs=/tmp/kafka-logs-3
@@ -103,8 +103,8 @@ bootstrap.servers=192.168.201.62:9092
 ```
 Node_1 ip 192.168.201.62
 ```
-# /usr/local/kafka/config
-# cat server.properties
+ /usr/local/kafka/config
+ cat server.properties
 broker.id=1
 listeners=PLAINTEXT://192.168.201.62:9092
 log.dirs=/tmp/kafka-logs-1
