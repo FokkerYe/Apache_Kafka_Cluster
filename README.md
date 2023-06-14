@@ -8,14 +8,19 @@ Node2. ip 192.168.201.79
 Node3. ip 192.168.201.80
 
 
+```
 sudo apt update  
 sudo apt install default-jdk 
 java --version 
 wget https://archive.apache.org/dist/kafka/3.2.0/kafka_2.13-3.2.0.tgz
 tar xzf kafka_2.13-3.2.0.tgz 
 sudo mv kafka_2.13-3.2.0 /usr/local/kafka
+
+```
+
+
 =====================================
- 
+ ```
 sudo nano /etc/systemd/system/zookeeper.service 
 
 [Unit]
@@ -70,6 +75,7 @@ cat producer.properties
 bootstrap.servers=192.168.201.62:9092
 ******************
 bootstrap.servers=192.168.201.62:9092
+```
 
 
 ===========================================================
