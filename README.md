@@ -102,7 +102,7 @@ bootstrap.servers=192.168.201.62:9092
 ===============================================================
 ```
 Node_1 ip 192.168.201.62
-
+```
 # /usr/local/kafka/config
 # cat server.properties
 broker.id=1
@@ -114,7 +114,7 @@ zookeeper.connect=192.168.201.62:2181,192.168.201.79:2181,192.168.201.80:2181
 ```
 Testing
 Node_1 ip 192.168.201.62
-
+```
 # bin/kafka-topics.sh --create --topic my-topic --bootstrap-server 192.168.201.62:9092 --replication-factor 1 --partitions 3
 
 ************
