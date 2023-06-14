@@ -82,7 +82,7 @@ bootstrap.servers=192.168.201.62:9092
 
 
 ===========================================================
-'''
+```
 Node_3 ip 192.168.201.80
 
 # /usr/local/kafka/config
@@ -100,7 +100,7 @@ bootstrap.servers=192.168.201.62:9092
 bootstrap.servers=192.168.201.62:9092
 
 ===============================================================
-'''
+```
 Node_1 ip 192.168.201.62
 
 # /usr/local/kafka/config
@@ -111,7 +111,7 @@ log.dirs=/tmp/kafka-logs-1
 zookeeper.connect=192.168.201.62:2181,192.168.201.79:2181,192.168.201.80:2181
 
 ===========================================================
-'''
+```
 Testing
 Node_1 ip 192.168.201.62
 
@@ -127,15 +127,15 @@ Node_3 ip 192.168.201.8----===Comsumer
 
 # bin/kafka-console-consumer.sh --bootstrap-server 192.168.201.62:9092 --topic my-topic --from-beginning 
 ===========================================================================================
-'''
+```
 Reverse message
-
+```
 Node_2
 # bin/kafka-console-producer.sh --broker-list 192.168.201.62:9092 --topic my-topic | bin/kafka-console-consumer.sh --bootstrap-server 192.168.201.62:9092 --topic my-topic --from-beginning
 Node_3
 # bin/kafka-console-producer.sh --broker-list 192.168.201.62:9092 --topic my-topic | bin/kafka-console-consumer.sh --bootstrap-server 192.168.201.62:9092 --topic my-topic --from-beginning
 ===========================================================================================
-
+ ```
 
 
 
