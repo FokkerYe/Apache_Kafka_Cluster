@@ -1,14 +1,14 @@
 # Apache_Kafka_Cluster_3-Nodes_Ubuntu 22.04_Server
 
-java 8 or higher
-RAM size Minimum 1 GB
+### java 8 or higher
+### RAM size Minimum 1 GB
 
-Node1. ip 192.168.201.62 
-Node2. ip 192.168.201.79
-Node3. ip 192.168.201.80
+### Node1. ip 192.168.100.62 
+### Node2. ip 192.168.100.79
+### Node3. ip 192.168.100.80
 
 
-```
+```bash
  sudo apt update  
  sudo apt install default-jdk 
  java --version 
@@ -19,9 +19,11 @@ Node3. ip 192.168.201.80
 ```
 
 
-=====================================
- ```
- sudo nano /etc/systemd/system/zookeeper.service 
+
+ ```bash
+ sudo nano /etc/systemd/system/zookeeper.service
+```
+```bash
 
 [Unit]
 Description=Apache Zookeeper server
@@ -37,11 +39,13 @@ Restart=on-abnormal
 
 [Install]
 WantedBy=multi-user.target
-########################
-```
 
 ```
-sudo nano /etc/systemd/system/kafka.service 
+
+```bash
+sudo nano /etc/systemd/system/kafka.service
+```
+```bash 
 
 [Unit]
 Description=Apache Kafka Server
@@ -58,96 +62,109 @@ ExecStop=/usr/local/kafka/bin/kafka-server-stop.sh
 WantedBy=multi-user.target
 ```
 
-```
 
-Service  Checking Command
- sudo systemctl daemon-reload 
+
+### Service  Checking Command
+ ```bash
+sudo systemctl daemon-reload 
  sudo systemctl start zookeeper 
  sudo systemctl start kafka 
  sudo systemctl status zookeeper 
  sudo systemctl status kafka
-#####################################
 ```
-Node_2 ip 192.168.201.79
-broder-2***Producer
+
+
+### Node_2 ip 192.168.100.79
+### broder-2***Producer
 ```
  /usr/local/kafka/config
  nano server.properties
 
 broker.id=2
-listeners=PLAINTEXT://192.168.201.79:9093
+listeners=PLAINTEXT://192.168.100.79:9093
 log.dirs=/tmp/kafka-logs-2
-zookeeper.connect=192.168.201.62:2181,192.168.201.79:2181,192.168.201.80:2181
+zookeeper.connect=192.168.100.62:2181,192.168.100.79:2181,192.168.100.80:2181
 ```
 
 ```
 nano producer.properties
-bootstrap.servers=192.168.201.62:9092
+bootstrap.servers=192.168.100.62:9092
 ```
 ```
 nano consumer.properties
-bootstrap.servers=192.168.201.62:9092
+bootstrap.servers=192.168.100.62:9092
 ```
 
 
-Node_3 ip 192.168.201.80
+### Node_3 ip 192.168.100.80
 
-```
+```bash
 
  /usr/local/kafka/config
  nano server.properties
+```
+```bash
 broker.id=3
 listeners=PLAINTEXT://192.168.201.80:9092
 log.dirs=/tmp/kafka-logs-3
-zookeeper.connect=192.168.201.62:2181,192.168.201.79:2181,192.168.201.80:2181
+zookeeper.connect=192.168.100.62:2181,192.168.100.79:2181,192.168.100.80:2181
+```
+```bash
 
 nano producer.properties
-bootstrap.servers=192.168.201.62:9092
+```
+```bash
+bootstrap.servers=192.168.100.62:9092
+```
+```bash
 nano consumer.properties
-bootstrap.servers=192.168.201.62:9092
 ```
-##################################################
+```bash
+bootstrap.servers=192.168.100.62:9092
+```
 
-Node_1 ip 192.168.201.62
-```
+
+### Node_1 ip 192.168.100.62
+```bash
  /usr/local/kafka/config
  cat server.properties
- broker.id=1
- listeners=PLAINTEXT://192.168.201.62:9092
- log.dirs=/tmp/kafka-logs-1
- zookeeper.connect=192.168.201.62:2181,192.168.201.79:2181,192.168.201.80:2181
- ````
-
-===========================================================
-
-Testing
-Node_1 ip 192.168.201.62
 ```
+```bash
+ broker.id=1
+ listeners=PLAINTEXT://192.168.100.62:9092
+ log.dirs=/tmp/kafka-logs-1
+ zookeeper.connect=192.168.100.62:2181,192.168.100.79:2181,192.168.100.80:2181
+ ```
+
+
+
+### Testing
+### Node_1 ip 192.168.100.62
+```bash
 bin/kafka-topics.sh --create --topic my-topic --bootstrap-server 192.168.201.62:9092 --replication-factor 1 --partitions 3
 
 ```
-Node_2 ip 192.168.201.79---===Producer
-```
+### Node_2 ip 192.168.100.79---===Producer
+```bash
 
 bin/kafka-console-producer.sh --broker-list 192.168.201.62:9092 --topic my-topic
 ```
 
 
-Node_3 ip 192.168.201.8----===Comsumer
-```
+### Node_3 ip 192.168.100.80----===Comsumer
+```bash
 
  bin/kafka-console-consumer.sh --bootstrap-server 192.168.201.62:9092 --topic my-topic --from-beginning 
  ```
-===========================================================================================
 
-Reverse message
+### Reverse message
 
-Node_2
-```
+### Node_2
+```bash
  bin/kafka-console-producer.sh --broker-list 192.168.201.62:9092 --topic my-topic | bin/kafka-console-consumer.sh --bootstrap-server 192.168.201.62:9092 --topic my-topic --from-beginning
  ```
-Node_3
-```
+### Node_3
+```bash
  bin/kafka-console-producer.sh --broker-list 192.168.201.62:9092 --topic my-topic | bin/kafka-console-consumer.sh --bootstrap-server 192.168.201.62:9092 --topic my-topic --from-beginning
 
  ```
